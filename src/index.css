@@ -77,7 +77,7 @@ a:active{
   width: 100%;
 }
 
-.input-box input {
+.input-box input, textarea {
   width: 100%;
   padding: 14px 12px;
   border: 1px solid #ccc;
@@ -86,8 +86,8 @@ a:active{
 }
 
 
-.input-box input:focus {
-  border-color: #4f46e5;
+.input-box input:focus, textarea:focus {
+  border-color:  #4f46e5;
 }
 
 .input-box label {
@@ -114,7 +114,19 @@ a:active{
   color: #ccc;
 }
 
-.form button {
+.input-box textarea:focus + label,
+.input-box.activ label {
+  top: -9px;
+  font-size: 12px;
+  color: #4f46e5;
+  width: auto;
+}
+
+.input-box textarea :has-slotted(:focus) + label {
+  color: #ccc;
+}
+
+.form button, .button {
   padding: 14px;
   border: none;
   border-radius: 10px;
@@ -125,10 +137,21 @@ a:active{
   transition: 0.3s;
 }
 
-.form button:hover {
+.form button:hover, .button:hover {
   background: #4338ca;
 }
 
 .on_hover:hover{
   color: #4338ca;
+}
+
+/* ------------------------------- */
+.create {
+  width: 50%;
+  margin: 200px auto;
+}
+
+.button {
+  width: 48%;
+  margin: 0 5px;
 }
