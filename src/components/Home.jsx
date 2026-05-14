@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Articles from '../services/Articles'
 import { PulseLoader } from 'react-spinners'
 import { useDispatch, useSelector } from 'react-redux'
-import { failLoading, startLoading, succedLoading } from '../slice/article'
-import { useNavigate } from 'react-router'
+import { EditingArticle, failLoading, startLoading, succedLoading } from '../slice/article'
+import { useNavigate, useParams } from 'react-router'
 
 function Home() {
   const dispatch = useDispatch()
   const { isLoading, articles } = useSelector((state) => state.article)
   const { loggedIn, user } = useSelector((state) => state.auth)
   const navigate = useNavigate()
-
+  
   const getArticles = async () => {
     dispatch(startLoading())
     try {
@@ -22,12 +22,17 @@ function Home() {
   }
 
   const deleteArticle = async (slug) => {
-      try {
-        await Articles.deleteArticle(slug)
-        getArticles()
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      await Articles.deleteArticle(slug)
+      getArticles()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const editArticle = async (article) => {
+    dispatch(EditingArticle(article))
+    navigate(`edit/${article.slug}`)
   }
 
   useEffect(() => {
@@ -68,7 +73,7 @@ function Home() {
 
                     {loggedIn && article.author.username === user.username ? (
                       <>
-                        <button className="btn btn-outline-warning w-100" onClick={() => navigat$e("/edit")}>
+                        <button className="btn btn-outline-warning w-100" onClick={() => editArticle(article)}>
                           Edit
                         </button>
 

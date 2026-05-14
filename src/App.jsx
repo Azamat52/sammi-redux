@@ -35,8 +35,8 @@ function App() {
         <Route path='create' element={<CreateArticle />} />
         <Route path='/login' element={<Login />} />
         <Route path='/registar' element={<Registar />} />
-        <Route path='/edit:slug' element={<EditArticle />} />
-      </Routes>
+        <Route path='/edit/:slug' element={<EditArticle />} />
+      </Routes>/
       <Outlet />
     </div>
   )

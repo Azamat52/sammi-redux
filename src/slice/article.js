@@ -39,8 +39,12 @@ export const articleSlice = createSlice({
             state.isloaded = false
             state.error = actions.payload
         },
+        // Edit 
+        EditingArticle: (state, action) => {
+            state.articleDetail = action.payload
+        }
     }
 })
 
-export const { startLoading, succedLoading, failLoading, startCreate, succedCreate, failCreate } = articleSlice.actions
+export const { startLoading, succedLoading, failLoading, startCreate, succedCreate, failCreate, EditingArticle } = articleSlice.actions
 export default articleSlice.reducer
