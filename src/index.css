@@ -19,21 +19,35 @@
   box-sizing: border-box;
 }
 
-a {
+.links {
   text-decoration: none;
   color: black;
+  padding: 10px 20px 15px 20px;
+  transition: 0.4s;
+  border-radius: 10px;
 }
 
-a:active{
+.on_hover {
+  text-decoration: none;
+  color: black;
+  transition: 0.4s;
+  border-radius: 10px;
+}
+
+.links:active {
   color: black;
 }
 
 .active {
   background: black;
   color: white;
-  border-radius: 5px;
-  padding: 10px 20px 15px 20px; 
-} 
+  border-radius: 10px;
+}
+
+.links:hover {
+  background: black;
+  color: white;
+}
 
 /* ----------------------- */
 .navbar {
@@ -60,7 +74,7 @@ a:active{
   margin: 100px auto;
   background: white;
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -76,7 +90,8 @@ a:active{
   width: 100%;
 }
 
-.input-box input, textarea {
+.input-box input,
+textarea {
   width: 100%;
   padding: 14px 12px;
   border: 1px solid #ccc;
@@ -85,8 +100,9 @@ a:active{
 }
 
 
-.input-box input:focus, textarea:focus {
-  border-color:  #4f46e5;
+.input-box input:focus,
+textarea:focus {
+  border-color: #4f46e5;
 }
 
 .input-box label {
@@ -101,7 +117,7 @@ a:active{
   width: 94%;
 }
 
-.input-box input:focus + label,
+.input-box input:focus+label,
 .input-box.activ label {
   top: -9px;
   font-size: 12px;
@@ -109,11 +125,11 @@ a:active{
   width: auto;
 }
 
-.input-box input :has-slotted(:focus) + label {
+.input-box input :has-slotted(:focus)+label {
   color: #ccc;
 }
 
-.input-box textarea:focus + label,
+.input-box textarea:focus+label,
 .input-box.activ label {
   top: -9px;
   font-size: 12px;
@@ -121,11 +137,12 @@ a:active{
   width: auto;
 }
 
-.input-box textarea :has-slotted(:focus) + label {
+.input-box textarea :has-slotted(:focus)+label {
   color: #ccc;
 }
 
-.form button, .button {
+.form button,
+.button {
   padding: 14px;
   border: none;
   border-radius: 10px;
@@ -136,11 +153,12 @@ a:active{
   transition: 0.3s;
 }
 
-.form button:hover, .button:hover {
+.form button:hover,
+.button:hover {
   background: #4338ca;
 }
 
-.on_hover:hover{
+.on_hover:hover {
   color: #4338ca;
 }
 
@@ -153,4 +171,108 @@ a:active{
 .button {
   width: 48%;
   margin: 0 5px;
+}
+
+/* ------------------------------------------------------------------------------------------------------- */
+.fade-page {
+  animation: fadeIn 1s ease;
+}
+
+.slide-top {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideTop 0.8s ease forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
+
+.author-card {
+  transition: all 0.35s ease;
+}
+
+.author-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12) !important;
+}
+
+.avatar-animation {
+  transition: transform 0.4s ease;
+}
+
+.author-card:hover .avatar-animation {
+  transform: scale(1.1) rotate(8deg);
+}
+
+.article-body {
+  transition: all 0.35s ease;
+}
+
+.article-body:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideTop {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* -------------- */
+.btns {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 8px 16px;
+  margin-right: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin: 10px;
+}
+
+.btns:hover {
+  opacity: 0.85;
+}
+
+.un_active {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  padding: 8px 16px;
+  margin-right: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin: 10px;
+}
+
+.un_active:hover {
+  background-color: #000;
+  color: #fff;
 }

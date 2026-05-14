@@ -35,8 +35,8 @@ function Registar() {
     }
   }, [loggedIn])
   return (
-    <form className='form' onSubmit={handleSubmit}>
-      <h1>Logo</h1>
+    <form className='form fade-page slide-top' onSubmit={handleSubmit}>
+      <h1>Please registar</h1>
       <Input label={"Username"} type={"text"} value={username} setState={setUsername} />
       <Input label={"Email"} type={"email"} value={email} setState={setEmail} />
       <Input label={"Password"} type={"password"} value={password} setState={setPassword} />

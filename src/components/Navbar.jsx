@@ -16,18 +16,19 @@ function Navbar() {
   }
 
   return (
-    <div className='navbar'>
+    <div className='navbar fade-page slide-top'>
       <div className="logo">
-        <Link to="/">Logo</Link>
+        <Link to="/" className='on_hover'>Logo</Link>
       </div>
       <div className="navigate">
         {loggedIn ? (
           <div style={{ display: 'flex', height: "100%", alignItems: "center" }}>
             <div>
-              <NavLink to="/create">Create Article</NavLink>
+              <NavLink to="/create" className="links">Create Article</NavLink>
             </div>
             <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
-              <p style={{ padding: "15px 20px 0px 20px" }}>{user.username}</p>
+              <p style={{ padding: "15px 5px 0px 20px" }} className='text-capitalize'>{user.username}</p>
+              <i className="fa-solid fa-user" style={{marginRight: "30px"}}></i>
               <button className="btn btn-outline-danger w-100" onClick={LogOut} >
                 Log out
               </button>
@@ -35,8 +36,8 @@ function Navbar() {
           </div>
         ) : (
           <>
-            <NavLink to="/login">Login</NavLink>
-            <NavLink to="/registar">Registar</NavLink>
+            <NavLink to="/login" className="links">Login</NavLink>
+            <NavLink to="/registar" className="links">Registar</NavLink>
           </>
         )
         }

@@ -34,8 +34,8 @@ function Login() {
     console.log(loggedIn);
     
   return (
-    <form className='form' onSubmit={loginHandler}>
-      <h1>Logo</h1>
+    <form className='form fade-page slide-top' onSubmit={loginHandler}>
+      <h1>Please login</h1>
       <Input label={"Email"} type={"email"} value={email} setState={setEmail}/>
       <Input label={"Password"} type={"password"} value={password} setState={setPassword}/>
       <button type='submit' disabled={isLoading}>Login</button>

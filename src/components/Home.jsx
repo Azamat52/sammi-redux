@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import Articles from '../services/Articles'
 import { PulseLoader } from 'react-spinners'
 import { useDispatch, useSelector } from 'react-redux'
-import { EditingArticle, failLoading, startLoading, succedLoading } from '../slice/article'
+import { failLoading, startLoading, succedLoading } from '../slice/article'
 import { useNavigate, useParams } from 'react-router'
 
 function Home() {
   const dispatch = useDispatch()
+  const [parts, setParts] = useState("all")
   const { isLoading, articles } = useSelector((state) => state.article)
   const { loggedIn, user } = useSelector((state) => state.auth)
   const navigate = useNavigate()
@@ -30,22 +31,27 @@ function Home() {
     }
   }
 
-  const editArticle = async (article) => {
-    dispatch(EditingArticle(article))
-    navigate(`edit/${article.slug}`)
-  }
-
   useEffect(() => {
     getArticles()
   }, [])
 
+  const filteredArticles = articles?.filter((article) => {
+    if (parts === "all") return true;
+    if (parts === "yours") return article.author.username === user.username;
+    if (parts === "others") return article.author.username !== user.username;
+    return false;
+  });
+
   return (
-    <div className="py-4">
+    <div className="py-4 fade-page slide-top">
       {isLoading ? <div style={{ width: "100%", textAlign: "center" }}><PulseLoader /></div> : (
         <div>
-          <h1>Aticles</h1>
+          <h1>Articles</h1>
+          <button onClick={() => setParts("all")} className={parts === "all" ? "btns" : "un_active"}>All</button>
+          <button onClick={() => setParts("yours")} className={parts === "yours" ? "btns" : "un_active"}>Yours</button>
+          <button onClick={() => setParts("others")} className={parts === "others" ? "btns" : "un_active"}>Others</button>          
           <div className="row g-4">
-            {articles && articles.map((article) => (
+            {filteredArticles && filteredArticles.map((article) => (
               <div className="col-md-4" key={article.id}>
                 <div className="card h-100 shadow-sm">
                   <img
@@ -54,7 +60,7 @@ function Home() {
                   />
 
                   <div className="card-body">
-                    <h5 className="card-title">
+                    <h5 className="card-title text-capitalize">
                       {article.title}
                     </h5>
 
@@ -62,18 +68,18 @@ function Home() {
                       {article.description}
                     </p>
                   </div>
-                  <div className='absalute w-99 text-right'>
-                    <p className='text-capitalize fw-bolder text-secondary'>{article.author.username}</p>
+                  <div className='absolute bottom-14 right-4'>
+                    <p className='text-capitalize fw-bolder text-secondary m-0'>{article.author.username}</p>
                   </div>
                   <div className="card-footer d-flex gap-2">
 
-                    <button className="btn btn-outline-primary w-100">
+                    <button className="btn btn-outline-primary w-100" onClick={() => navigate(`info/${article.slug}`)}>
                       View
                     </button>
 
                     {loggedIn && article.author.username === user.username ? (
                       <>
-                        <button className="btn btn-outline-warning w-100" onClick={() => editArticle(article)}>
+                        <button className="btn btn-outline-warning w-100" onClick={() => navigate(`/edit/${article.slug}`)}> 
                           Edit
                         </button>
 

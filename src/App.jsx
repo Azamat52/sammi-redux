@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 import { succesLogin } from './slice/auth-slice'
 import { getItem } from './services/LocalStorage'
 import EditArticle from './components/EditArticle'
+import ArticleInfo from './components/ArticleInfo'
 function App() {
   const dispatch = useDispatch()
   const getUser = async () => {
@@ -35,6 +36,7 @@ function App() {
         <Route path='create' element={<CreateArticle />} />
         <Route path='/login' element={<Login />} />
         <Route path='/registar' element={<Registar />} />
+        <Route path='/info/:slug' element={<ArticleInfo />} />
         <Route path='/edit/:slug' element={<EditArticle />} />
       </Routes>/
       <Outlet />

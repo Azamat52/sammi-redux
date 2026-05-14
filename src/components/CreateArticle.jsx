@@ -35,7 +35,7 @@ function CreateArticle() {
     }
 
     return (
-        <div className='create'>
+        <div className='create fade-page slide-top'>
             <h1 style={{ textAlign: "center" }}>Create Your Article</h1>
             <form action="" onSubmit={handleSubmit}>
                 <Input label={"Title"} value={title} setState={setTitle} />

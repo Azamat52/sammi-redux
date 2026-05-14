@@ -13,8 +13,12 @@ const Articles = {
         const { data } = await api_axios.delete(`/articles/${slug}`)
         return data
     },
-    async editArticle(article, slug) {
-        const { data } = await api_axios.put(`/articles/${slug}`, article)
+    async getArticleDetail(slug) {
+        const { data } = await api_axios.get(`/articles/${slug}`)
+        return data
+    },
+    async EditArticle(slug, newArticle) {
+        const { data } = await api_axios.put(`/articles/${slug}`, { article: newArticle })
         return data
     }
 }
