@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Registar from './../components/auth/Registar';
+import { setItem } from "../services/LocalStorage";
 
 const initialState = {
     // Login
-    users: null,
+    user: null,
     isLoading: false,
     loggedIn: false,
     error: null,
@@ -25,8 +25,9 @@ export const authSlice = createSlice({
         succesLogin: (state, action) => {
             state.isLoading = false
             state.loggedIn = true
-            state.users = action.payload
-            state.isRegistar = true
+            state.user = action.payload            
+            setItem("token", action.payload.token)
+            state.isRegistar = false
             state.registared = true
             state.error = null
         },
@@ -39,7 +40,7 @@ export const authSlice = createSlice({
         startRegistar: (state) => {
             state.isRegistar = true
         },
-        succesRegistar: (state, action) => {
+        succesRegistar: (state) => {
             state.isRegistar = false
             state.registared = true
             state.error = null
@@ -48,9 +49,15 @@ export const authSlice = createSlice({
             state.isRegistar = false
             state.registared = false
             state.error = action.payload
-        }
+        },
+        // Log Out
+        UserLogOut: (state) => {            
+            state.loggedIn = false
+            state.user = null
+            state.error = null
+        },
     }
 })
 
-export const {startLogin, succesLogin, failedLogin, startRegistar, succesRegistar, failedRegistar} = authSlice.actions
+export const {startLogin, succesLogin, failedLogin, startRegistar, succesRegistar, failedRegistar, UserLogOut} = authSlice.actions
 export default authSlice.reducer

@@ -6,8 +6,11 @@ const Articles = {
         return data
     },
     async createArticle (article){
-        console.log(article);
         const {data} = await api_axios.post("/articles", {article})
+        return data
+    },
+    async deleteArticle(slug){
+        const {data} = await api_axios.delete(`/articles/${slug}`)
         return data
     }
 }
