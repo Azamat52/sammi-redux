@@ -35,6 +35,12 @@ function Home() {
     getArticles()
   }, [])
 
+  useEffect(() => {
+    if(!loggedIn){
+      navigate("/registar")
+    }
+  }, [loggedIn])
+  
   const filteredArticles = articles?.filter((article) => {
     if (parts === "all") return true;
     if (parts === "yours") return article.author.username === user.username;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from './../ui/Input';
 import TextArea from '../ui/TextArea';
 import { v4 as id } from "uuid"
@@ -12,6 +12,7 @@ function CreateArticle() {
     const [description, setDescription] = useState("")
     const [body, setBody] = useState("")
     const { isLoading } = useSelector((state) => state.article)
+    const { loggedIn } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const Reset = () => {
@@ -33,6 +34,12 @@ function CreateArticle() {
             dispatch(failCreate(error.textMessage))
         }
     }
+
+    useEffect(() => {
+        if(!loggedIn) {
+            navigate("/registar")
+        }
+    }, [loggedIn])
 
     return (
         <div className='create fade-page slide-top'>

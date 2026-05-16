@@ -8,6 +8,7 @@ import { failGetDetail, startGetDetail, succedGetDetail } from '../slice/article
 
 function EditArticle() {
     const { isLoading, articleDetail } = useSelector((state) => state.article)
+    const { loggedIn } = useSelector((state) => state.auth)
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [body, setBody] = useState("")
@@ -46,7 +47,13 @@ function EditArticle() {
             console.log(error);
         }
     }
-    
+
+    useEffect(() => {
+        if (!loggedIn) {
+            navigate("/registar")
+        }
+    }, [loggedIn])
+
     return (
         <div className='create fade-page slide-top'>
             <h1 style={{ textAlign: "center" }}>Edit Article</h1>

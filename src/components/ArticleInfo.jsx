@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router'
 
 function ArticleInfo() {
     const { articleDetail } = useSelector((state) => state.article)
+    const { loggedIn } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { slug } = useParams()
@@ -22,6 +23,12 @@ function ArticleInfo() {
         }
         getArticleDetails()
     }, [])
+
+    useEffect(() => {
+        if(!loggedIn){
+            navigate("/registar")
+        }
+    }, [loggedIn])
 
     return (
         <div>
