@@ -3,7 +3,7 @@ import Articles from '../services/Articles'
 import { PulseLoader } from 'react-spinners'
 import { useDispatch, useSelector } from 'react-redux'
 import { failLoading, startLoading, succedLoading } from '../slice/article'
-import { useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams, useRouteError } from 'react-router'
 
 function Home() {
   const dispatch = useDispatch()
@@ -11,7 +11,7 @@ function Home() {
   const { isLoading, articles } = useSelector((state) => state.article)
   const { loggedIn, user } = useSelector((state) => state.auth)
   const navigate = useNavigate()
-  
+
   const getArticles = async () => {
     dispatch(startLoading())
     try {
@@ -47,11 +47,14 @@ function Home() {
       {isLoading ? <div style={{ width: "100%", textAlign: "center" }}><PulseLoader /></div> : (
         <div>
           <h1>Articles</h1>
-          <button onClick={() => setParts("all")} className={parts === "all" ? "btns" : "un_active"}>All</button>
-          <button onClick={() => setParts("yours")} className={parts === "yours" ? "btns" : "un_active"}>Yours</button>
-          <button onClick={() => setParts("others")} className={parts === "others" ? "btns" : "un_active"}>Others</button>          
+          {loggedIn && (
+            <div>
+              <button onClick={() => setParts("all")} className={parts === "all" ? "btns" : "un_active"}>All</button>
+              <button onClick={() => setParts("yours")} className={parts === "yours" ? "btns" : "un_active"}>Yours</button>
+              <button onClick={() => setParts("others")} className={parts === "others" ? "btns" : "un_active"}>Others</button>
+            </div>)}
           <div className="row g-4">
-            {filteredArticles && filteredArticles.map((article) => (
+            {filteredArticles?.map((article) => (
               <div className="col-md-4" key={article.id}>
                 <div className="card h-100 shadow-sm">
                   <img
@@ -79,7 +82,7 @@ function Home() {
 
                     {loggedIn && article.author.username === user.username ? (
                       <>
-                        <button className="btn btn-outline-warning w-100" onClick={() => navigate(`/edit/${article.slug}`)}> 
+                        <button className="btn btn-outline-warning w-100" onClick={() => navigate(`/edit/${article.slug}`)}>
                           Edit
                         </button>
 

@@ -6,13 +6,14 @@ import Registar from './components/auth/Registar'
 import Home from './components/Home'
 import CreateArticle from './components/CreateArticle'
 import Authintification from './services/Authintification'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { succesLogin } from './slice/auth-slice'
 import { getItem } from './services/LocalStorage'
 import EditArticle from './components/EditArticle'
 import ArticleInfo from './components/ArticleInfo'
 function App() {
   const dispatch = useDispatch()
+  const { loggedIn } = useSelector((state) => state.auth)
   const getUser = async () => {
     try {
       const response = await Authintification.GetUser()

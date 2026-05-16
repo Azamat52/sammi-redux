@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { failGetDetail, startGetDetail, succedGetDetail } from '../slice/article'
 import Articles from '../services/Articles'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 
 function ArticleInfo() {
     const { articleDetail } = useSelector((state) => state.article)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { slug } = useParams()
 
     useEffect(() => {
@@ -27,6 +28,8 @@ function ArticleInfo() {
             {articleDetail && (
                 <div className="container py-5 fade-page">
                     <div className="mx-auto" style={{ maxWidth: "900px" }}>
+
+                        <button className="btn btn-outline-primary w-40 slide-top " onClick={() => navigate("/")}><i className="fa-solid fa-arrow-left mx-2"></i>Go back</button>
 
                         {/* TITLE */}
                         <h1 className="display-3 fw-bold mb-3 text-dark text-capitalize slide-top">
