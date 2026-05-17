@@ -38,7 +38,7 @@ function Login() {
       <Errors />
       <Input label={"Email"} type={"email"} value={email} setState={setEmail} />
       <Input label={"Password"} type={"password"} value={password} setState={setPassword} />
-      <button type='submit' disabled={isLoading}>{isLoading ? "Loadin..." : "Login"}</button>
+      <button type='submit' disabled={isLoading}>{isLoading ? "Loading..." : "Login"}</button>
       <p>You don't have an account? <Link to="/registar" className='on_hover'>Registar</Link></p>
     </form>
   )

@@ -23,7 +23,7 @@ function ArticleInfo() {
         }
         getArticleDetails()
     }, [])
-
+    
     useEffect(() => {
         if(!loggedIn){
             navigate("/registar")
